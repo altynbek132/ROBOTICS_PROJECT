@@ -50,6 +50,7 @@ def main():
 
     for name in name_to_joint.keys():
         set_random_force(name)
+        client.step()
 
     while True:
         global t, count, entries
