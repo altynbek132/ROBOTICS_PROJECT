@@ -9,7 +9,6 @@ import os
 from datetime import datetime
 
 today = datetime.today().strftime('%Y-%m-%d-%H-%M-%S')
-file_name = f'datasets/data_gen_{today}.txt'
 
 client = RemoteAPIClient()
 sim = client.getObject('sim')
@@ -37,37 +36,48 @@ name_to_last_target_force_change = dict.fromkeys(name_to_joint.keys(), 0)
 
 max_force_not_changing_time = 1
 
-vel_limit = 0.05
-pos_limit = 0.05
+vel_limit = 0.5
+pos_limit = 0.5
 
 t = 0
 count = 0
+movement_i = 0
+entries = 0
 
 def main():
-    for name, joint in name_to_joint.items():
+
+    for name in name_to_joint.keys():
         set_random_force(name)
 
     while True:
-        global t, count
+        global t, count, entries
         t = sim.getSimulationTime()
 
         config_joints()
 
-        # if (count != 0):
-            # write_positions()
+        if are_force_mode(name_to_joint.values()):
+            print(f'entries: {entries}')
+            print(f'movement_i: {movement_i}')
+            write_positions()
+            entries += 1
 
         count += 1
         client.step()
 
 
 def config_joints():
+    if are_pos_mode(name_to_joint.values()) and are_stopped(name_to_joint.values()):
+        global movement_i
+        movement_i += 1
+        set_random_force_for_all()
+        return
     for name, joint in name_to_joint.items():
         pos = sim.getJointPosition(joint)
-        if is_pos_mode(joint) and has_stopped(joint):
-            set_random_force(name)
         # hit limit
-        elif not (is_between(pos, name_to_pos_limit[name])):
-            go_to_zero_with_pos(name)
+        if not (is_between(pos, name_to_pos_limit[name])):
+            go_to_zero_with_pos_for_all()
+            global entries
+            return
         # very low force
         elif is_force_mode(joint) and very_long_time_no_force_change(name):
             set_random_force(name)
@@ -78,6 +88,25 @@ def very_long_time_no_force_change(name):
 def is_pos_mode(joint):
     return sim.getObjectInt32Param(
             joint, sim.jointintparam_dynctrlmode) == sim.jointdynctrl_position
+
+def go_to_zero_with_pos_for_all():
+    for name, joint in name_to_joint.items():
+        go_to_zero_with_pos(name)
+
+def are_pos_mode(joints):
+    for joint in joints:
+        if not is_pos_mode(joint):
+            return False
+    return True
+
+def are_force_mode(joints):
+    return not are_pos_mode(joints)
+
+def are_stopped(joints):
+    for joint in joints:
+        if not has_stopped(joint):
+            return False
+    return True
 
 def is_force_mode(joint):
     return not is_pos_mode(joint)
@@ -93,6 +122,9 @@ def set_force_mode(joint):
     sim.setObjectInt32Param(
             joint, sim.jointintparam_dynctrlmode, sim.jointdynctrl_force)
 
+def set_random_force_for_all():
+    for name in name_to_joint.keys():
+        set_random_force(name)
 
 def set_random_force(name):
     joint = name_to_joint[name]
@@ -115,19 +147,21 @@ def gen_force(joint_name):
     return generateRandomBetween(-force, force)
 
 
-def write_header():
-    with open(file_name, 'a') as f:
-        names = name_to_joint.keys()
-        l = ['time']
-        for name in names:
-            l.append(f'Pos{name}')
-            l.append(f'Vel{name}')
-            l.append(f'For{name}')
-        f.write(' '.join(l))
-        f.write('\n')
-
 
 def write_positions():
+    def write_header():
+        with open(file_name, 'a') as f:
+            names = name_to_joint.keys()
+            l = ['time']
+            for name in names:
+                l.append(f'Pos{name}')
+                l.append(f'Vel{name}')
+                l.append(f'For{name}')
+            f.write(' '.join(l))
+            f.write('\n')
+
+    file_name = f'datasets/data_gen_{today}-{movement_i}.txt'
+
     l = [t]
     for joint in name_to_joint.values():
         l.append(sim.getJointPosition(joint))
@@ -137,7 +171,7 @@ def write_positions():
     with open(file_name, 'a') as f:
         if os.stat(file_name).st_size == 0:
             write_header()
-        line = ' '.join(str(e) for e in list)
+        line = ' '.join(str(e) for e in l)
         f.write(line)
         f.write('\n')
 

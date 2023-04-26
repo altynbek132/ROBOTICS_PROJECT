@@ -1,0 +1,7 @@
+backup/.DS_Store
+backup/best_saved_model.data-00000-of-00001
+backup/best_saved_model.index
+backup/checkpoint
+backup/
+datasets/
+olddatasets/
