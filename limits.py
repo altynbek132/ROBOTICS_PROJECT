@@ -3,32 +3,35 @@ import math
 def degreeToRadian(degree):
     return degree * math.pi / 180
 
+def radianToDegree(radian):
+    return radian * 180 / math.pi
+
 name_to_pos_limit = {
-    'LHipYaw': (degreeToRadian(-30)/1.2, degreeToRadian(30)/1.2),
-    'LHipPitch': (degreeToRadian(-45)/1.2, degreeToRadian(45)/1.2),
-    'LHipRoll': (degreeToRadian(-30)/1.2, degreeToRadian(30)/1.2),
-    'LKnee': (degreeToRadian(-90)/1.2, degreeToRadian(90)/1.2),
-    'LAnklePitch': (degreeToRadian(-45)/1.2, degreeToRadian(45)/1.2),
-    'LAnkleRoll': (degreeToRadian(-30)/1.2, degreeToRadian(30)/1.2),
-    'RHipYaw': (degreeToRadian(-30)/1.2, degreeToRadian(30)/1.2),
-    'RHipPitch': (degreeToRadian(-45)/1.2, degreeToRadian(45)/1.2),
-    'RHipRoll': (degreeToRadian(-30)/1.2, degreeToRadian(30)/1.2),
-    'RKnee': (degreeToRadian(-90)/1.2, degreeToRadian(90)/1.2),
-    'RAnklePitch': (degreeToRadian(-45)/1.2, degreeToRadian(45)/1.2),
-    'RAnkleRoll': (degreeToRadian(-30)/1.2, degreeToRadian(30)/1.2),
+    'LHipYaw': (degreeToRadian(-30), degreeToRadian(30)),
+    'LHipPitch': (degreeToRadian(-45), degreeToRadian(45)),
+    'LHipRoll': (degreeToRadian(-30), degreeToRadian(30)),
+    'LKnee': (degreeToRadian(-90), degreeToRadian(90)),
+    'LAnklePitch': (degreeToRadian(-45), degreeToRadian(45)),
+    'LAnkleRoll': (degreeToRadian(-30), degreeToRadian(30)),
+    'RHipYaw': (degreeToRadian(-30), degreeToRadian(30)),
+    'RHipPitch': (degreeToRadian(-45), degreeToRadian(45)),
+    'RHipRoll': (degreeToRadian(-30), degreeToRadian(30)),
+    'RKnee': (degreeToRadian(-90), degreeToRadian(90)),
+    'RAnklePitch': (degreeToRadian(-45), degreeToRadian(45)),
+    'RAnkleRoll': (degreeToRadian(-30), degreeToRadian(30)),
 }
 
 name_to_force_limit = {
-    'LHipYaw': 30,
-    'LHipPitch': 30,
-    'LHipRoll': 30,
-    'LKnee': 30,
-    'LAnklePitch': 30,
-    'LAnkleRoll': 30,
-    'RHipYaw': 30,
-    'RHipPitch': 30,
-    'RHipRoll': 30,
-    'RKnee': 30,
-    'RAnklePitch': 30,
-    'RAnkleRoll': 30,
+    'LHipYaw': 2.5,
+    'LHipPitch': 3,
+    'LHipRoll': 14,
+    'LKnee': 10,
+    'LAnklePitch': 2.5,
+    'LAnkleRoll': 2.5,
+    # 'RHipYaw': 14,
+    # 'RHipPitch': 14,
+    # 'RHipRoll': 14,
+    # 'RKnee': 14,
+    # 'RAnklePitch': 14,
+    # 'RAnkleRoll': 14,
 }
