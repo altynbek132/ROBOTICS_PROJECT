@@ -62,7 +62,7 @@ def main():
         if are_force_mode(name_to_joint.values()):
             print(f"entries: {entries}")
             # print(f'movement_i: {movement_i}')
-            write_positions()
+            # write_positions()
             entries += 1
 
         count += 1
@@ -166,6 +166,8 @@ def set_random_force(name):
     set_force_mode(joint)
     pos = sim.getJointPosition(joint)
     force = gen_force(name)
+    if name == "LHipRoll":
+        print(f"force: {force}")
     if (pos < 0 and force < 0) or (pos > 0 and force > 0):
         force = -force
     name_to_target_force[name] = force

@@ -1,26 +1,10 @@
-50 50 50 50
-rmse: 0.091 - mae: 0.062 - r_square: 0.8536
-
-50 50 50 50 50
-rmse: 0.093 - mae: 0.063 - r_square: 0.8366
-
-50 50 50 50 50 50
-rmse: 0.088 - mae: 0.059 - r_square: 0.8604
-
-100 100 100 100
-rmse: 0.091 - mae: 0.062 - r_square: 0.8527
-
-100 100 100 100 100
-rmse: 0.088 - mae: 0.059 - r_square: 0.8606
-
-100 100 100 100 100 100
-rmse: 0.087 - mae: 0.057 - r_square: 0.8666
-
-200 200 200 200
-rmse: 0.087 - mae: 0.059 - r_square: 0.8642
-
-200 200 200 200 200
-rmse: 0.092 - mae: 0.064 - r_square: 0.8384
-
-200 200 200 200 200 200
-rmse: 0.086 - mae: 0.060 - r_square: 0.8669
+validation 100:                                             mse: 0.0094 - nmse: 0.1700 - rmse: 0.0971 - nrmse: 0.1235 - mae: 0.0683
+validation 100 100:                                         mse: 0.0091 - nmse: 0.1606 - rmse: 0.0955 - nrmse: 0.1210 - mae: 0.0667
+validation 100 100 100:                                     mse: 0.0086 - nmse: 0.1542 - rmse: 0.0925 - nrmse: 0.1174 - mae: 0.0637
+validation 100 100 100 100:                                 mse: 0.0093 - nmse: 0.1642 - rmse: 0.0964 - nrmse: 0.1217 - mae: 0.0669
+validation 100 100 100 100 100:                             mse: 0.0078 - nmse: 0.1384 - rmse: 0.0882 - nrmse: 0.1112 - mae: 0.0599
+validation 100 100 100 100 100 100:                         mse: 0.0083 - nmse: 0.1442 - rmse: 0.0911 - nrmse: 0.1157 - mae: 0.0645
+validation 100 100 100 100 100 100 100:                     mse: 0.0072 - nmse: 0.1240 - rmse: 0.0846 - nrmse: 0.1061 - mae: 0.0561
+validation 100 100 100 100 100 100 100 100:                 mse: 0.0080 - nmse: 0.1397 - rmse: 0.0896 - nrmse: 0.1109 - mae: 0.0580
+validation 100 100 100 100 100 100 100 100 100:             mse: 0.0092 - nmse: 0.1595 - rmse: 0.0959 - nrmse: 0.1217 - mae: 0.0673
+validation 100 100 100 100 100 100 100 100 100 100:         mse: 0.0111 - nmse: 0.1863 - rmse: 0.1052 - nrmse: 0.1330 - mae: 0.0752
